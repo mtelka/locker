@@ -230,9 +230,11 @@ main(int argc, char *argv[])
 
 		act.sa_handler = &siglost;
 		act.sa_flags = SA_RESTART;
+#ifndef __linux__
 		if (sigaction(SIGLOST, &act, NULL) < 0) {
 			printf("sigaction failed\n");
 		}
+#endif
 		if (sigaction(SIGINT, &act, NULL) < 0) {
 			printf("sigaction failed\n");
 		}
