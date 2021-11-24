@@ -108,6 +108,7 @@ locktest_cmd(int argc, char *argv[])
 	if (fcntl(f, cmd, &fl) == -1) {
 		printf("fcntl failed: (%d) %s\n",
 		    errno, strerror(errno));
+		(void) close(f);
 		return 0;
 	}
 
@@ -122,6 +123,8 @@ locktest_cmd(int argc, char *argv[])
 		}
 
 		printf("F_GETLK: %s %ld %ld\n", s, fl.l_start, fl.l_len);
+
+		(void) close(f);
 	}
 
 	return 0;
